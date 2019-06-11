@@ -1,5 +1,8 @@
 # KCDC IaC Sample Scripts
-Sample project containing all the scripts used in the IaC demo for KCDC
+Sample project containing all the scripts used in the IaC demo for KCDC.
+
+## Slide Deck
+You can find the slide deck from the presentation here: https://docs.google.com/presentation/d/1mzFTchnTQvGyaGc7iOH643CIleEHZH-efJ4u8d3sGWQ/edit?usp=sharing
 
 ## Configuring Infrastructure as Code in Octopus Deploy
 

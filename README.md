@@ -23,7 +23,7 @@ Then in that screen, checking the checkbox for `Allow managing dynamic infrastru
 
 I changed existing lifecycles or added new lifecycles to support infrastructure as code.  My updated lifecycles are:
 
-1) Default Lifecycle -> handles deployments to the `master.`.  All environments except `Production` are optional as I might want to deploy from Dev to Prod or from Dev to TearDown.  
+1) Default Lifecycle -> handles deployments to the `master.`  All environments except `Production` are optional as I might want to deploy from Dev to Prod or from Dev to TearDown.  
 2) IaC and Feature Branch Lifecycle -> handles deployments to feature branches and all IaC projects.
 3) Production Spin-Up Lifecycle -> handles scenarios when I need to spin up a bunch of production machines to handle additional load.  
 4) TearDown Only -> Primarily used for extra clean-up.  In my case it is cleaning up any remnants of feature branches deployments.

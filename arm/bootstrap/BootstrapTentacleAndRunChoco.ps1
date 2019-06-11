@@ -1,7 +1,8 @@
 Param(    
     [string]$octopusServerThumbprint,    
     [string]$instanceName,		
-		[string]$chocolateyAppList	
+		[string]$chocolateyAppList,
+		[string]$dismAppList	
 )
 
 Start-Transcript -path "C:\Bootstrap.txt" -append  
@@ -9,6 +10,7 @@ Start-Transcript -path "C:\Bootstrap.txt" -append
 Write-Output "Thumbprint: $octopusServerThumbprint"  
 Write-Output "InstanceName: $instanceName"
 Write-Output "ChocolateyAppList: $chocolateyAppList"
+Write-Output "DismAppList: $dismAppList"
 
 function Get-FileFromServer 
 { 
@@ -114,14 +116,17 @@ if ($OctoTentacleService -eq $null)
   Write-Output "Tentacle already exists"
 }    
 
-if ([string]::IsNullOrWhiteSpace($chocolateyAppList) -eq $false){	
+if ([string]::IsNullOrWhiteSpace($chocolateyAppList) -eq $false -or [string]::IsNullOrWhiteSpace($dismAppList) -eq $false)
+{
 	try{
 		choco config get cacheLocation
 	}catch{
 		Write-Output "Chocolatey not detected, trying to install now"
 		iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 	}
-	
+}
+
+if ([string]::IsNullOrWhiteSpace($chocolateyAppList) -eq $false){	
 	Write-Host "Chocolatey Apps Specified, installing chocolatey and applications"	
 	
 	$appsToInstall = $chocolateyAppList -split "," | foreach { "$($_.Trim())" }
@@ -130,6 +135,18 @@ if ([string]::IsNullOrWhiteSpace($chocolateyAppList) -eq $false){
 	{
 		Write-Host "Installing $app"
 		& choco install $app /y | Write-Output
+	}
+}
+
+if ([string]::IsNullOrWhiteSpace($dismAppList) -eq $false){
+	Write-Host "DISM Apps Specified, installing chocolatey and applications"	
+
+	$appsToInstall = $dismAppList -split "," | foreach { "$($_.Trim())" }
+
+	foreach ($app in $appsToInstall)
+	{
+		Write-Host "Installing $app"
+		& choco install $app /y /source windowsfeatures | Write-Output
 	}
 }
 

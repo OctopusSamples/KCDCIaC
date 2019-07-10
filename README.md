@@ -32,5 +32,5 @@ This repository is here to provide you a written version of the presentation at 
 
 1. [Core Concepts and Recommendations](CoreConceptsAndRecommendations.md)
 2. [General Octopus Deploy Configuration](ConfigureOctopusDeploy.md)
-
+3. [Scaling Out Production](ScalingOutProduction.md)
 

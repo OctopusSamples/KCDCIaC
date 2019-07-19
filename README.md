@@ -4,6 +4,9 @@ Sample project containing all the scripts used in the IaC demo for KCDC.
 ## Slide Deck
 You can find the slide deck from the presentation here: https://docs.google.com/presentation/d/1mzFTchnTQvGyaGc7iOH643CIleEHZH-efJ4u8d3sGWQ/edit?usp=sharing
 
+## Video Recording
+Prior to KCDC I did several practice runs of the presentation.  This is a recording of one of those sessions: https://youtu.be/I8k2ox9QtXw  
+
 ## Introduction
 
 Infrastructure as Code (IaC) allows you to define your infrastructure using a common language, such as JSON or YAML, and store it in a file. That file can be included as part of your deployment.  In this section, we will walk you through some core concepts of IaC.  Later we will discuss how to configure Octopus Deploy to leverage infrastructure as code.  In later sections, we will go through some common real-world scenarios.

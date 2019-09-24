@@ -31,10 +31,6 @@ $OctoTentacleService = Get-Service "OctopusDeploy Tentacle" -ErrorAction Silentl
 
 if ($OctoTentacleService -eq $null)
 {
-    $tentacleListenPort = 10933 
-    $tentacleHomeDirectory = "C:\Octopus" 
-    $tentacleAppDirectory = "C:\Octopus\Applications" 
-    $tentacleConfigFile = "C:\Octopus\Tentacle\Tentacle.config"  
     $tentacleDownloadPath = "https://octopus.com/downloads/latest/WindowsX64/OctopusTentacle" 	
 	
 	$tentaclePath = "C:\Tools\Octopus.Tentacle.msi" 
@@ -70,39 +66,5 @@ if ($OctoTentacleService -eq $null)
 } else {
   Write-Output "Tentacle already exists"
 }    
-
-if ([string]::IsNullOrWhiteSpace($chocolateyAppList) -eq $false -or [string]::IsNullOrWhiteSpace($dismAppList) -eq $false)
-{
-	try{
-		choco config get cacheLocation
-	}catch{
-		Write-Output "Chocolatey not detected, trying to install now"
-		iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-	}
-}
-
-if ([string]::IsNullOrWhiteSpace($chocolateyAppList) -eq $false){	
-	Write-Host "Chocolatey Apps Specified, installing chocolatey and applications"	
-	
-	$appsToInstall = $chocolateyAppList -split "," | foreach { "$($_.Trim())" }
-
-	foreach ($app in $appsToInstall)
-	{
-		Write-Host "Installing $app"
-		& choco install $app /y | Write-Output
-	}
-}
-
-if ([string]::IsNullOrWhiteSpace($dismAppList) -eq $false){
-	Write-Host "DISM Apps Specified, installing chocolatey and applications"	
-
-	$appsToInstall = $dismAppList -split "," | foreach { "$($_.Trim())" }
-
-	foreach ($app in $appsToInstall)
-	{
-		Write-Host "Installing $app"
-		& choco install $app /y /source windowsfeatures | Write-Output
-	}
-}
 
 Write-Output "Bootstrap commands complete"  

@@ -55,13 +55,6 @@ if ($OctoTentacleService -eq $null)
 	  throw "Installation aborted" 
 	} 	
 
-    
-    Write-Output "Open port $tentacleListenPort on Windows Firewall" 
-    & netsh.exe firewall add portopening TCP $tentacleListenPort "Octopus Tentacle" 
-    if ($lastExitCode -ne 0) { 
-        throw "Installation failed when modifying firewall rules" 
-    } 
-
 	Set-Location "${env:ProgramFiles}\Octopus Deploy\Tentacle" 
 
 	& .\Tentacle.exe create-instance --instance "Tentacle" --config "C:\Octopus\Tentacle.config"
